@@ -1,5 +1,5 @@
 # Demo
-https://sleepy-hollows-87599.herokuapp.com
+https://fast-fjord-97961.herokuapp.com
 # Get starting
 
 1. Install MongoDB and open command line with mongod --dbpath ['path's folder database']
