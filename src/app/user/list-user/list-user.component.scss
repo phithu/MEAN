@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Material Icons";
+  src: url("/assets/font/Material-Design-Iconic-Font.woff") format("woff")
+}
+.search {
+    margin: 0px 7px;
+    position: relative;
+    & md-input-container {
+        width: 100%
+    }
+    &::before {
+        font-family: 'Material Icons';
+        content: '\f1c3';
+        right: 10px;
+        top: 15px;
+        font-size: 20pt;
+        position: absolute;
+    }
+}

@@ -1,0 +1,100 @@
+<ng-container *ngIf="user">
+    <form id="formEdit" [formGroup]="editForm" (ngSubmit)="receivedValueForm(editForm.value)">      
+        <div class="flex">
+            <div class="flex-grow">
+                <ng-container *ngIf="uploader.queue.length > 0 && uploader; else notUploaded">
+                    <ng-container *ngFor="let item of uploader.queue">
+                        <div class="images__box flex">
+                            <img src={{item.images}} [ngClass]="{'uploadingImages': item.isUploaded}" class="avatar_large avatarUser images__box__img">
+                            <div *ngIf="!item.isUploaded"  class="images__box__progress">
+                                <span>{{item.progress}}%</span>
+                                <md-progress-bar mode="determinate" value={{item.progress}}></md-progress-bar>
+                            </div>
+                            <button class="images__box__button" md-icon-button (click)="item.remove()">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <ng-template #notUploaded>
+                    <ng-container *ngIf="user.images.length > 1; else isLetter">
+                        <div class="avatar_large avatarUser">
+                            <img src={{user.images}}>
+                        </div>
+                    </ng-container>
+                    <ng-template #isLetter>
+                        <div ptRandomColor class="avatar_large avatarUser flex">
+                            <span>{{user.images}}</span>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+            <div id="avatarControl">
+                <div id="buttonGroup" class="flex">
+                    <input (change)="onChange()" name="image" #fileInput type="file" accept="image/*" ng2FileSelect [uploader]="uploader" /> 
+                    <button type="button" (click)="fileInput.click()" color="primary" md-raised-button>
+                        <md-icon>file_upload</md-icon> Upload avatar
+                    </button>
+                    <ng-container *ngIf="user.images.length > 1">
+                        <button (click)="removeImages()" type="button" color="warn" md-raised-button>
+                            <md-icon>clear</md-icon> Remove avatar
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        
+        </div>
+
+        <md-input-container class="input__customize">
+                <input maxlength="20" mdInput placeholder="Name" required formControlName="inputName">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputName.touched || inputName.dirty) && !inputName.valid">
+                <md-chip *ngIf="inputName.errors.required" selected="true" color="warn">
+                    Name is required
+                </md-chip>
+                <md-chip *ngIf="inputName.errors.minlength" selected="true" color="warn">
+                    Name is not valid (More than character)
+                </md-chip>
+            </md-chip-list>
+
+            <md-input-container class="input__customize">
+                <input mdInput maxlength="30" placeholder="Address" required formControlName="inputAddress">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputAddress.touched || inputAddress.dirty) && !inputAddress.valid">
+                <md-chip *ngIf="inputAddress.errors.required" selected="true" color="warn">
+                    Address is required
+                </md-chip>
+                <md-chip *ngIf="inputAddress.errors.minlength" selected="true" color="warn">
+                    Address is not valid (More than character)
+                </md-chip>
+            </md-chip-list>
+
+            <md-input-container class="input__customize">
+                <input mdInput placeholder="Age" maxlength="2" required formControlName="inputAge">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputAge.touched || inputAge.dirty) && !inputAge.valid">
+                <md-chip *ngIf="inputAge.errors.required" selected="true" color="warn">
+                    Age is required
+                </md-chip>
+                <md-chip *ngIf="inputAge.errors.minlength" selected="true" color="warn">
+                    Age is not valid (More than character)
+                </md-chip>
+                <md-chip *ngIf="inputAge.errors.pattern" selected="true" color="warn">
+                    Age is not valid (Only include number)
+                </md-chip>
+            </md-chip-list>
+
+        <ng-container *ngIf="changeAvatar; else notChangeAvatar">
+            <button class="right" type="submit" color="primary" [disabled]="!editForm.valid || !uploader.queue[0].isUploaded" md-raised-button>
+                Save
+            </button>
+        </ng-container>
+        <ng-template #notChangeAvatar>
+            <button class="right" type="submit" color="primary" [disabled]="!editForm.valid" md-raised-button>
+            Save
+            </button>
+        </ng-template>
+        <div class="clearfix"></div>
+    </form>
+</ng-container>

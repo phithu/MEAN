@@ -1,0 +1,68 @@
+<md-card>
+    <form class="flex" [formGroup]="addNewForm" (ngSubmit)="receivedValueForm(addNewForm.value)">
+        <div id="inputControl" class="flex-grow">
+            <md-input-container class="input__customize">
+                <input maxlength="20" mdInput placeholder="Name" required formControlName="inputName">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputName.touched || inputName.dirty) && !inputName.valid">
+                <md-chip *ngIf="inputName.errors.required" selected="true" color="warn">
+                    Name is required
+                </md-chip>
+                <md-chip *ngIf="inputName.errors.minlength" selected="true" color="warn">
+                    Name is not valid (More than character)
+                </md-chip>
+            </md-chip-list>
+
+            <md-input-container class="input__customize">
+                <input mdInput maxlength="30" placeholder="Address" required formControlName="inputAddress">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputAddress.touched || inputAddress.dirty) && !inputAddress.valid">
+                <md-chip *ngIf="inputAddress.errors.required" selected="true" color="warn">
+                    Address is required
+                </md-chip>
+                <md-chip *ngIf="inputAddress.errors.minlength" selected="true" color="warn">
+                    Address is not valid (More than character)
+                </md-chip>
+            </md-chip-list>
+
+            <md-input-container class="input__customize">
+                <input mdInput placeholder="Age" maxlength="2" required formControlName="inputAge">
+            </md-input-container>
+            <md-chip-list *ngIf="(inputAge.touched || inputAge.dirty) && !inputAge.valid">
+                <md-chip *ngIf="inputAge.errors.required" selected="true" color="warn">
+                    Age is required
+                </md-chip>
+                <md-chip *ngIf="inputAge.errors.minlength" selected="true" color="warn">
+                    Age is not valid (More than character)
+                </md-chip>
+                <md-chip *ngIf="inputAge.errors.pattern" selected="true" color="warn">
+                    Age is not valid (Only include number)
+                </md-chip>
+            </md-chip-list>
+
+
+            <button class="right" type="submit" color="primary" [disabled]="!addNewForm.valid" md-raised-button>Save</button>
+            <div class="clearfix"></div>
+        </div>
+        <div id="avatarControl">
+            <input (change)="onChange()" name="image" #fileInput type="file" accept="image/*" ng2FileSelect [uploader]="uploader" />
+            <button type="button" (click)="fileInput.click()" color="primary" md-raised-button>
+                <md-icon>file_upload</md-icon> Upload avatar
+            </button>
+
+            <ng-container *ngFor="let item of uploader.queue">
+                <div class="images__box">
+                    <img src={{item.images}} [ngClass]="{'uploadingImages': item.isUploaded}" alt="" class="images__box__img">
+                    <div *ngIf="!item.isUploaded" class="images__box__progress">
+                        <span>{{item.progress}}%</span>
+                        <md-progress-bar mode="determinate" value={{item.progress}}></md-progress-bar>
+                    </div>
+                    <button class="images__box__button" md-button (click)="item.remove()">
+                        <i class="material-icons">remove</i>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+    </form>
+</md-card>

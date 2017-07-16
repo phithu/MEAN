@@ -1,0 +1,109 @@
+$sizeButton: 35px;
+.input__customize {
+    display: block !important;
+    width: 100%;
+    margin: 10px auto;
+}
+.right {
+    float: right;
+}
+.clearfix {
+    clear: both;
+}
+md-card {
+    width: 70%;
+    margin: 0px auto;
+    display: block;
+}
+#inputControl {
+    margin-right: 20px;
+}
+#avatarControl {
+    position: relative;
+    margin-left: 20px;
+    & input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 36px;
+    }
+
+}
+
+.images__box {
+    width:150px;
+    height: 180px;
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    margin-top: 15px;
+    
+    &__button {
+        position: absolute;
+        background: red;
+        top: 5px;
+        right: 5px;
+        height: $sizeButton;
+        width: $sizeButton !important;
+        border-radius: 50%;
+        margin: 0px;
+        padding: 0px !important;
+        min-width: $sizeButton !important;
+        transition:All .5s ease;
+        transform: scale(0.4);
+        opacity: 0;
+        visibility: hidden;
+        & i {
+            font-size: 30pt;
+            color: #fff;
+            opacity: 1;
+            font-weight: bold;
+            top: -2px;
+            left: -3px;
+            position: absolute;
+        }
+    }
+    &__img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        filter:blur(10px);
+    }
+    &__progress {
+        position: absolute;
+        z-index: 1;
+        width: 80%;
+        top: 75px;
+        margin: 0px 10%;
+        & span {
+            text-align: center;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+    }
+    & .uploadingImages {
+        filter:blur(0px);
+    }
+    &:hover > button {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+    }
+    
+}
+@media screen and (max-width: 992px) {
+    md-card {
+        width: 90%;
+        & form {
+            flex-direction: column-reverse;
+        }
+        & #avatarControl {
+            margin-left: 0px;
+            margin-bottom: 30px;
+            align-self: center;
+        }
+    }
+}

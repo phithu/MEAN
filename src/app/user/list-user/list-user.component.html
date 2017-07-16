@@ -1,0 +1,19 @@
+<div class="search">
+   <md-input-container floatPlaceholder="never" class="example-full-width">
+      <input autocomplete="false" maxlength="30" (keyup)=filterUser($event) mdInput placeholder="Search user">
+    </md-input-container>
+</div>
+<div class="flex" *ngIf="listUser">
+    <ng-container *ngIf="listUser.length > 0; else isEmpty">
+        <ng-container *ngFor="let userItem of listUser">
+            <pt-user-item (idUserUpdate)="updateUserById($event)" (idUserDelete)="removeUserById($event)" [user]="userItem">
+            </pt-user-item>
+        </ng-container>
+    </ng-container>
+    <ng-template #isEmpty>
+        <p style="padding: 0px 7px">No result...</p>
+    </ng-template>
+</div>
+<div (status)="getStatus($event)">
+    {{dialog}}
+</div>

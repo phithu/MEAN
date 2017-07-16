@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&subset=vietnamese');
+
+@mixin fontRoboto($fontSize, $color) {
+    font-family: 'Roboto', sans-serif;
+    font-size: $fontSize;
+    color: $color;
+}
+#title {
+    color: #fff;
+    margin-right: 50px;
+    & span {
+        align-self: center;
+        @include fontRoboto(12pt, #fff);
+        margin-left: 10px;
+    }
+    & md-icon {
+        align-self: center;
+    }
+}
+#hiden {
+    margin-top: 15px;
+    text-align: right;
+    @include fontRoboto(10pt, #d3d3d3);
+
+}
+button {
+    & md-icon {
+        margin: 0px 5px;
+    }
+}

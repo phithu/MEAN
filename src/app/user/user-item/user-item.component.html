@@ -1,0 +1,32 @@
+<md-card class="flex">
+    <ng-container *ngIf="user.images.length > 1; else isLetter">
+        <div class="avatar_small avatarUser">
+            <img src={{user.images}}>
+        </div>
+    </ng-container>
+    <ng-template #isLetter>
+        <div ptRandomColor class="avatar_small avatarUser flex">
+            <span>{{user.images}}</span>
+        </div>
+    </ng-template>
+    <div class="card__body flex-grow">
+        <p><strong>Name: </strong>{{user.name}}</p>
+        <p><strong>Address: </strong>{{user.address}}</p>
+        <p><strong>Age: </strong>{{user.age}}</p>
+    </div>
+    <div class="card__header flex">
+        <button md-icon-button [mdMenuTriggerFor]="menu">
+            <md-icon>more_vert</md-icon>
+        </button>
+        <md-menu #menu="mdMenu">
+            <button (click)="deleteUser(user._id)" md-menu-item>
+                <md-icon>delete</md-icon>
+                <span>Delete</span>
+            </button>
+            <button (click)="updateUser(user)" md-menu-item>
+                <md-icon>border_color</md-icon>
+                <span>Edit</span>
+            </button>
+        </md-menu>
+    </div>
+</md-card>

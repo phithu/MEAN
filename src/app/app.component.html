@@ -1,0 +1,17 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [ease]="'linear'" [speed]="300" [showSpinner]="false" [direction]="'leftToRightIncreased'" [color]="'red'" [trickleSpeed]="300" [thick]="true"></ng-progress>
+<header>
+    <md-toolbar color="primary">
+        <span class="flex-grow">
+            <a routerLink="/">User Application</a>
+        </span>
+        <span>
+            <a href="https://github.com/phithu/MEAN">
+                Github
+            </a>
+        </span>
+    </md-toolbar>
+</header>
+<main>
+    <router-outlet></router-outlet>
+</main>
+<a color="primary" id="addNew__Button" routerLink="/add" md-fab><md-icon>add</md-icon></a>
